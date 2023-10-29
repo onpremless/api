@@ -1,17 +1,27 @@
 openapi: 3.0.0
 info:
   version: '1.0.0'
-  title: 'core'
+  title: 'onpremless'
+  description: 'onpremless api'
+  contact:
+    name: 'Ilya Sumbatyants'
+    email: 'ilya.sumb@gmail.com'
   license:
-    name: MIT
+    name: 'MIT License'
 servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/hedlx/doless/1.0.0
-  - url: 'localhost:8081'
+  - description: 'Local'
+    url: 'localhost:8081'
+tags:
+  - name: runtime
+  - name: lambda
+  - name: upload
+  - name: endpoint
+  - name: task
 paths:
   /upload:
     post:
       summary: 'Upload file'
+      description: 'Uploads file and returns file id'
       operationId: upload
       tags:
         - upload
@@ -44,6 +54,7 @@ paths:
   /runtime:
     get:
       summary: 'List runtimes'
+      description: 'Returns available runtimes'
       operationId: 'listRuntimes'
       tags:
         - runtime
@@ -64,6 +75,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       summary: 'Create runtime'
+      description: 'Creates runtime'
       operationId: 'createRuntime'
       tags:
         - runtime
@@ -90,6 +102,7 @@ paths:
   /runtime/{id}:
     get:
       summary: 'Get runtime'
+      description: 'Returns runtime by id'
       operationId: 'getRuntime'
       tags:
         - runtime
@@ -117,6 +130,7 @@ paths:
   /lambda:
     get:
       summary: 'List lambdas'
+      description: 'Returns list of available lambdas'
       operationId: 'listLambdas'
       tags:
         - lambda
@@ -137,6 +151,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       summary: 'Create lambda'
+      description: 'Creates lambda'
       operationId: 'createLambda'
       tags:
         - lambda
@@ -163,6 +178,7 @@ paths:
   /lambda/{id}:
     get:
       summary: 'Get lambda'
+      description: 'Returns lambda by id'
       operationId: 'getLambda'
       tags:
         - lambda
@@ -189,6 +205,7 @@ paths:
   /lambda/{id}/start:
     post:
       summary: 'Start lambda'
+      description: 'Sets up and runs lambda'
       operationId: 'startLambda'
       tags:
         - lambda
@@ -214,7 +231,8 @@ paths:
                 $ref: '#/components/schemas/Error'
   /lambda/{id}/destroy:
     post:
-      summary: 'Stop lambda and remove docker container'
+      summary: 'Destroy lambda'
+      description: 'Stops lambda and removes docker container'
       operationId: 'destroyLambda'
       tags:
         - lambda
@@ -242,6 +260,7 @@ paths:
   /endpoint:
     get:
       summary: 'List endpoints'
+      description: 'Returns list of endpoints'
       operationId: 'listEndpoints'
       tags:
         - endpoint
@@ -262,6 +281,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       summary: 'Create endpoint'
+      description: 'Creates new endpoint'
       operationId: 'createEndpoint'
       tags:
         - endpoint
@@ -288,6 +308,7 @@ paths:
   /endpoint/{id}:
     get:
       summary: 'Get endpoint'
+      description: 'Returns endpoint by id'
       operationId: 'getEndpoint'
       tags:
         - endpoint
@@ -313,6 +334,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       summary: 'Delete endpoint'
+      description: 'Deletes endpoint by id'
       operationId: 'deleteEndpoint'
       tags:
         - endpoint
@@ -336,6 +358,7 @@ paths:
   /task/{id}:
     get:
       summary: 'Get task status'
+      description: 'Returns task status by id'
       operationId: 'getTask'
       tags:
         - task
@@ -515,3 +538,4 @@ components:
       properties:
         error:
           type: string
+
