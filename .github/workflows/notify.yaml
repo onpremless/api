@@ -9,7 +9,7 @@ jobs:
     name: Notify onpremless/go-client
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.POOR_MAN_ACCESS_TOKEN }}
           script: |
