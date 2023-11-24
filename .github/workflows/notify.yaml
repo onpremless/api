@@ -1,0 +1,21 @@
+name: Notify dependent api clients
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  notify-go-client:
+    name: Notify onpremless/go-client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.POOR_MAN_ACCESS_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: 'go-client',
+              workflow_id: 'gen-n-pub.yaml',
+              ref: 'master'
+            })
